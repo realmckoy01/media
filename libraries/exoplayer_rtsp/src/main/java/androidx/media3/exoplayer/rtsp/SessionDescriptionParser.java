@@ -81,6 +81,9 @@ import java.util.regex.Pattern;
     // and related SDP lines until the next valid media description.
     boolean isSkippingMediaDescription = false;
 
+    // Strip empty line to fix reolink parising issue
+    sdpString = sdpString.replaceAll("\n\n", "\n");
+
     // Lines are separated by an CRLF.
     for (String line : RtspMessageUtil.splitRtspMessageBody(sdpString)) {
       if ("".equals(line)) {
